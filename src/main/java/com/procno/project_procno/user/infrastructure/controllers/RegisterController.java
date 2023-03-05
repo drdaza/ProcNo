@@ -1,5 +1,6 @@
 package com.procno.project_procno.user.infrastructure.controllers;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -28,9 +29,17 @@ public class RegisterController {
     public ResponseEntity<Map<String,String>> registerUser(@RequestBody User user) {
         
         try {
-            service.store(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+            User userDB = service.store(user);
+            Map<String, String> json = new HashMap<>();
+
+            json.put("username", userDB.getUsername());
+            json.put("message", "successful sign up");
+            return ResponseEntity.status(HttpStatus.CREATED).body(json);
         } catch (Exception e) {
+            Map<String, String> json = new HashMap<>();
+
+            json.put("prolem", e.getMessage());
+            json.put("message", "Error to sign up");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);        }
         
     }
