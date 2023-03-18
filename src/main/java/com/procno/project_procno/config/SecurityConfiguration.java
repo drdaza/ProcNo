@@ -16,7 +16,7 @@ import com.procno.project_procno.user.application.detailsService.JpaUserDetailsS
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-    
+
     @Autowired
     MyAuthenticationEntryPoint authenticationEntryPoint;
 
@@ -27,34 +27,34 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors()
-            .and()
-            .headers(header -> header.frameOptions().sameOrigin())
-            .csrf(csrf -> csrf.disable())
-            .formLogin(form -> form.disable())
-            .logout(out -> out
-                    .logoutUrl("/api/logout")
-                    .deleteCookies("JSESSIONID"))
-            .authorizeRequests(auth -> auth
-                    .antMatchers("/api/register").permitAll()
-                    .antMatchers("/api/login").hasAnyRole("USER", "ADMIN")
-                    .antMatchers("/api/templates/delete").hasRole("ADMIN")
-                    .anyRequest()
-                    .authenticated())
-            .userDetailsService(service)
-            .sessionManagement(session -> session
-                    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-            .httpBasic(basic -> basic
-                    .authenticationEntryPoint(authenticationEntryPoint))
-            .httpBasic(Customizer.withDefaults());   
-                
+                .cors()
+                .and()
+                .headers(header -> header.frameOptions().sameOrigin())
+                .csrf(csrf -> csrf.disable())
+                .formLogin(form -> form.disable())
+                .logout(out -> out
+                        .logoutUrl("/api/logout")
+                        .deleteCookies("JSESSIONID"))
+                .authorizeRequests(auth -> auth
+                        .antMatchers("/api/register").permitAll()
+                        .antMatchers("/api/login").hasAnyRole("USER", "ADMIN")
+                        .antMatchers("/api/templates/delete").hasRole("ADMIN")
+                        .anyRequest()
+                        .authenticated())
+                .userDetailsService(service)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .httpBasic(basic -> basic
+                        .authenticationEntryPoint(authenticationEntryPoint))
+                .httpBasic(Customizer.withDefaults());
+
         return http.build();
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
