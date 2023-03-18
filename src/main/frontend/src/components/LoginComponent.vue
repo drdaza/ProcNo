@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
+import { useAuthStore } from '@/stores/AuthStore';
+import { useRouter } from 'vue-router';
 
+const authStore = useAuthStore();
+const router = useRouter();
 let username = ref('');
 let password = ref('');
 
@@ -27,9 +31,15 @@ const rulesUsername = [
 ];
 const rulesPassword = [
     (value: string) => !!value || 'Password is required.',
-    (value: string) => /\w\d+/.test(value) == true || "Password should contain digits and alphanumerics.",
-    (value: string) => value.length > 8 || 'Password must not be less than 8 characters.'
+    /* (value: string) => /\w\d+/.test(value) == true || "Password should contain digits and alphanumerics.", */
+    (value: string) => value.length >= 8 || 'Password must not be less than 8 characters.'
 ];
+
+const login = async ()=>{
+   const response = await authStore.login(username.value, password.value)
+
+   if(response == 'auth') router.push({name:'session'})
+}
 </script>
 <template>
     <div class="login-wrapper">
@@ -63,7 +73,7 @@ const rulesPassword = [
         </div>
         <p>{{ passwordPhrase }}</p>
         <div class="button-zone">
-            <v-btn :width="'50%'" :color="'green'">Iniciar sesión</v-btn>
+            <v-btn :width="'50%'" :color="'green'" @click="login()">Iniciar sesión</v-btn>
         </div>
     </div>
 </template>

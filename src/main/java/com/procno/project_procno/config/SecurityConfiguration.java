@@ -33,7 +33,9 @@ public class SecurityConfiguration {
                 .and()
                 .headers(header -> header.frameOptions().sameOrigin())
                 .csrf(csrf -> csrf.disable())
-                .formLogin(form -> form.disable())
+                .formLogin(form -> form
+                        .loginPage("/api/login")
+                        .disable())
                 .logout(out -> out
                         .logoutUrl("/api/logout")
                         .deleteCookies("JSESSIONID"))
@@ -45,7 +47,7 @@ public class SecurityConfiguration {
                         .authenticated())
                 .userDetailsService(service)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .httpBasic(basic -> basic
                         .authenticationEntryPoint(authenticationEntryPoint))
                 .httpBasic(Customizer.withDefaults());
