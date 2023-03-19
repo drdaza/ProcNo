@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.procno.project_procno.user.application.services.RegisterService;
 import com.procno.project_procno.user.domain.models.User;
+import com.procno.project_procno.user.domain.payloads.RegisterPayload;
 
 
 
@@ -26,10 +27,10 @@ public class RegisterController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Map<String,String>> registerUser(@RequestBody User user) {
+    public ResponseEntity<Map<String,String>> registerUser(@RequestBody RegisterPayload infoUser) {
         
         try {
-            User userDB = service.store(user);
+            User userDB = service.store(infoUser);
             Map<String, String> json = new HashMap<>();
 
             json.put("username", userDB.getUsername());

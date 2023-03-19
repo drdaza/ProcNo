@@ -34,8 +34,17 @@ export const useAuthStore = defineStore('authStore',{
 
             const payLoad = new RegisterPayload(firstEncode,secondEncode)
 
-            console.log(payLoad.getUserPassword);
-            console.log(window.atob(payLoad.getEmail));
+            const repository = new Repository('auth')
+
+            const service = repository.chooseApi()
+
+            console.log(payLoad.getEmail);
+            
+
+            const response = await service?.register(payLoad)
+
+            console.log(response?.status);
+            
             
         },
         encoder(username:String, password:String){

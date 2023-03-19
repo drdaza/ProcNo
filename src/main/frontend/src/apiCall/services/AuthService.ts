@@ -10,10 +10,10 @@ export default class AuthService{
 
     public async register(registerInfo: RegisterPayload){
         
-        const json:Map<String,String> = new Map<String,String>()
-
-        json.set('usernameAndPass', registerInfo.getUserPassword)
-        json.set('emailAndPass', registerInfo.getEmail)
+        const json = {
+            'usernameAndPass':registerInfo.getUserPassword,
+            'emailAndPass': registerInfo.getEmail
+        }
 
         const response = axios.post(this.baseUrl+'/register',json)
 
