@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { computed, ref, watchEffect} from 'vue';
+import { useAuthStore } from '@/stores/AuthStore';
 
-
+const AuthStore = useAuthStore()
 let username = ref('')
 let email = ref('')
 let repeatEmail = ref('')
@@ -26,7 +27,6 @@ const rulesEmail = [
 ]
 
 
-
 watchEffect(()=>{
     if(email.value != '' && password.value!='') register.value=true
 })
@@ -35,6 +35,9 @@ const canRegister = computed(()=>{
     return (register.value && email.value===repeatEmail.value && password.value===repeatPassword.value) ? false : true
 })
 
+const makeRegister =()=>{
+    AuthStore.register(username.value,password.value,email.value)
+}
 </script>
 <template>
     <div class="register-wrapper">
@@ -107,7 +110,7 @@ const canRegister = computed(()=>{
             </div>
         </div>
         <div class="button-zone">
-            <v-btn :width="'50%'" :color="'green'" :disabled="canRegister">Register</v-btn>
+            <v-btn :width="'50%'" :color="'green'" :disabled="canRegister" @click="makeRegister()">Register</v-btn>
         </div>
     </div>
 </template>

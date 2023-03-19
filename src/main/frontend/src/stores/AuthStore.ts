@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import Repository from "@/apiCall/Repository";
+import RegisterPayload from "@/apiCall/payloads/RegisterPayload";
 
 export const useAuthStore = defineStore('authStore',{
     state: ()=>({
@@ -25,6 +26,17 @@ export const useAuthStore = defineStore('authStore',{
             this.isAuthenticate = true;
 
             if(this.username != '') return 'auth'
+        },
+        async register(username:String, password:String,email:String){
+
+            const firstEncode = this.encoder(username,password)
+            const secondEncode = this.encoder(email,password)
+
+            const payLoad = new RegisterPayload(firstEncode,secondEncode)
+
+            console.log(payLoad.getUserPassword);
+            console.log(window.atob(payLoad.getEmail));
+            
         },
         encoder(username:String, password:String){
             const infoEncode:String = window.btoa(`${username}:${password}`)

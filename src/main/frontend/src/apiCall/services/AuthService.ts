@@ -12,8 +12,8 @@ export default class AuthService{
         
         const json:Map<String,String> = new Map<String,String>()
 
-        json.set('firstParameter', registerInfo.getUserPassword)
-        json.set('secondParamenter', registerInfo.getEmail)
+        json.set('usernameAndPass', registerInfo.getUserPassword)
+        json.set('emailAndPass', registerInfo.getEmail)
 
         const response = axios.post(this.baseUrl+'/register',json)
 
