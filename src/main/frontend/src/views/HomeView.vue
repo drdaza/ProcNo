@@ -1,41 +1,34 @@
-<script setup lang="ts">
-import LoginComponent from '@/components/LoginComponent.vue';
-
+<script lang="ts" setup>
+import { RouterLink } from 'vue-router';
+import LandingComponent from '../components/LandingComponent.vue'
 </script>
 <template>
   <main>
-    <div class="login-space">
-      <LoginComponent />
+    <div class="landing-space">
+        <LandingComponent/>
     </div>
   </main>
 </template>
+
 <style lang="scss" scoped>
+@use '../assets/styles/main' as *;
 main {
   width: 100%;
   height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  @include flexDisplay(row, center, center);
 
-  .login-space {
+  .landing-space{
     width: 100%;
     height: 100vh;
   }
 }
-@media(min-width: 800px){
-main {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  .login-space {
-    width: 60%;
+@media (min-width: 801px) {
+  main{
     height: 100vh;
+    .landing-space{
+      width: 40%;
+      height: 60vh;
+    }
   }
-}
 }
 </style>

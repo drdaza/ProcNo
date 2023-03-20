@@ -114,7 +114,7 @@ const makeRegister =()=>{
         </div>
     </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../assets/styles/main' as *;
 .register-wrapper{
     width: 100%;
