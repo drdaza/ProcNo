@@ -67,7 +67,8 @@ const login = async ()=>{
                     :variant="'solo'" 
                     label="Password" 
                     type="password"
-                    :rules="rulesPassword">
+                    :rules="rulesPassword"
+                    counter="20"    >
                 </v-text-field>
             </div>
         </div>
