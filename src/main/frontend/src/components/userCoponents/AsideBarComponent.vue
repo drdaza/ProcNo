@@ -2,6 +2,10 @@
 import { computed, ref } from 'vue';
 import openMenuIcon from '../icons/OpenMenuIcon.vue'
 import userIcon from '../icons/UserIcon.vue'
+import MyProjectsIcon from '../icons/MyProjectsIcon.vue'
+import MyFavoritesIcon from '../icons/MyFavoritesIcon.vue'
+import NewProjectIcon from '../icons/NewProjectIcon.vue'
+import TrashProjectIcon from '../icons/TrashProjectIcon.vue'
 const expand = ref(false)
 
 
@@ -23,17 +27,23 @@ const arrowMenuChanger = computed(() => {
 
         <aside>
             <div class="appear-transition" v-if="classInspector == 'small'">
+
                 <i><userIcon/></i>
-                <i><userIcon/></i>
-                <i><userIcon/></i>
-                <i><userIcon/></i>
-                <i><userIcon/></i>
-                <i><userIcon/></i>
+                <i><MyProjectsIcon/></i>
+                <i><MyFavoritesIcon/></i>
+                <i><NewProjectIcon/></i>
+                
+                <div class="trash-zone">
+                    <i><TrashProjectIcon/></i>
+                </div>
             </div>
+            
             <div class="appear-transition" v-if="classInspector == 'medium'">
+                <h1>Usuario</h1>
                 <h1>Mis Proyectos</h1>
                 <h1>Favoritos</h1>
                 <h1>Nueva plantilla</h1>
+                <h1>papelera</h1>
             </div>
 
         </aside>
@@ -57,6 +67,7 @@ const arrowMenuChanger = computed(() => {
 
     aside {
         width: 100%;
+
     }
 
     .rotate {
@@ -68,6 +79,9 @@ const arrowMenuChanger = computed(() => {
 .appear-transition{
     animation-duration: 1s;
     animation-name: arrow-menu;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
 }
 @keyframes arrow-menu{
     from {
