@@ -4,11 +4,13 @@ import { useAuthStore } from '@/stores/AuthStore';
 
 const authStore = useAuthStore();
 
-
+const navegateTo = (routeToNavegate:String)=>{
+    console.log(routeToNavegate);
+}
 </script>
 <template>
     <main>
-    <AsideBarComponent/>
+    <AsideBarComponent @emit-route="navegateTo"/>
     <h1>hi {{ authStore.username }}</h1>
     </main>
 </template>

@@ -19,6 +19,12 @@ const classInspector = computed(() => {
 const arrowMenuChanger = computed(() => {
     return (expand.value == false) ? 'rotate' : 'normal';
 }) 
+
+const emits = defineEmits(['emitRoute'])
+
+const emitRoute = (routeToNavigate: String)=>{
+    emits('emitRoute', routeToNavigate)
+}
 </script>
  
 <template>
@@ -29,21 +35,21 @@ const arrowMenuChanger = computed(() => {
             <div class="appear-transition" v-if="classInspector == 'small'">
 
                 <i><userIcon/></i>
-                <i><MyProjectsIcon/></i>
-                <i><MyFavoritesIcon/></i>
-                <i><NewProjectIcon/></i>
+                <i @click="emitRoute('myProjects')"><MyProjectsIcon/></i>
+                <i @click="emitRoute('favorites')"><MyFavoritesIcon/></i>
+                <i @click="emitRoute('newProject')"><NewProjectIcon/></i>
                 
                 <div class="trash-zone">
-                    <i><TrashProjectIcon/></i>
+                    <i @click="emitRoute('trash')"><TrashProjectIcon/></i>
                 </div>
             </div>
             
             <div class="appear-transition" v-if="classInspector == 'medium'">
                 <h1>Usuario</h1>
-                <h1>Mis Proyectos</h1>
-                <h1>Favoritos</h1>
-                <h1>Nueva plantilla</h1>
-                <h1>papelera</h1>
+                <h1 @click="emitRoute('myProjects')">Mis Proyectos</h1>
+                <h1 @click="emitRoute('favorites')">Favoritos</h1>
+                <h1 @click="emitRoute('newProject')">Nueva plantilla</h1>
+                <h1 @click="emitRoute('trash')">papelera</h1>
             </div>
 
         </aside>

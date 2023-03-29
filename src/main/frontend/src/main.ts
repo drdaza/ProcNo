@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createVuetify } from 'vuetify'
-import axios from 'axios'
 
 import App from './App.vue'
 import router from './router'
@@ -12,6 +11,34 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '../src/assets/styles/_main.scss'
+
+const pinia = createPinia()
+
+pinia.use((context) => {
+  const storeId = context.store.$id
+
+  console.log(storeId);
+  
+  const serializer = {
+    serialize: JSON.stringify,
+    deserialize: JSON.parse
+  }
+
+ 
+   const fromStorage = serializer.deserialize(window.sessionStorage.getItem(storeId)||'null')
+ 
+  
+
+  /* const fromStorage:string=  */
+
+  if (fromStorage!='null') {
+    context.store.$patch(fromStorage)
+  }
+
+  context.store.$subscribe((mutation, state) => {
+    window.sessionStorage.setItem(storeId, serializer.serialize(state))
+  })
+})
 
 const vuetify = createVuetify({
   components,
@@ -28,7 +55,7 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.use(vuetify)
 
