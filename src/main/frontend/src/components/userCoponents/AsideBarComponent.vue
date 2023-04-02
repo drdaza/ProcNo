@@ -34,7 +34,7 @@ const emitRoute = (routeToNavigate: String)=>{
         <aside>
             <div class="appear-transition" v-if="classInspector == 'small'">
 
-                <i><userIcon/></i>
+                <i @click="emitRoute('dashbboardUser')"><userIcon/></i>
                 <i @click="emitRoute('myProjects')"><MyProjectsIcon/></i>
                 <i @click="emitRoute('favorites')"><MyFavoritesIcon/></i>
                 <i @click="emitRoute('newProject')"><NewProjectIcon/></i>
@@ -45,7 +45,7 @@ const emitRoute = (routeToNavigate: String)=>{
             </div>
             
             <div class="appear-transition" v-if="classInspector == 'medium'">
-                <h1>Usuario</h1>
+                <h1 @click="emitRoute('dashbboardUser')">Usuario</h1>
                 <h1 @click="emitRoute('myProjects')">Mis Proyectos</h1>
                 <h1 @click="emitRoute('favorites')">Favoritos</h1>
                 <h1 @click="emitRoute('newProject')">Nueva plantilla</h1>
@@ -58,7 +58,7 @@ const emitRoute = (routeToNavigate: String)=>{
 
 <style lang="scss" scoped>
 .asidebar-wrapper {
-    background-color: red;
+    background-color: gainsboro;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

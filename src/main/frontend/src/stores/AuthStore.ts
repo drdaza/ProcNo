@@ -38,14 +38,11 @@ export const useAuthStore = defineStore('authStore',{
 
             const service = repository.chooseApi()
 
-            console.log(payLoad.getEmail);
-            
-
             const response = await service?.register(payLoad)
 
             console.log(response?.status);
             
-            
+            return response?.status
         },
         encoder(username:String, password:String){
             const infoEncode:String = window.btoa(`${username}:${password}`)

@@ -1,24 +1,23 @@
 <script lang="ts" setup>
-import AsideBarComponent from '@/components/userCoponents/AsideBarComponent.vue';
+
 import { useAuthStore } from '@/stores/AuthStore';
+import UserService from '@/apiCall/services/UserService';
 
 const authStore = useAuthStore();
 
-const navegateTo = (routeToNavegate:String)=>{
-    console.log(routeToNavegate);
-}
+const userServiceTest:UserService = new UserService();
+
+userServiceTest.userInfo(authStore.username);
+
 </script>
 <template>
-    <main>
-    <AsideBarComponent @emit-route="navegateTo"/>
+
     <h1>hi {{ authStore.username }}</h1>
-    </main>
+
+    
 </template>
 <style lang="scss" scoped>
 @use '../../assets/styles/main' as *;
-main{
-    width: 100%;
-    @include flexDisplay(row, normal, normal)
-}
+
 
 </style>
