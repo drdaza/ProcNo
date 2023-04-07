@@ -8,13 +8,15 @@ const roouter = useRouter()
 
 const navegateTo = (routeToNavegate: String) => {
     console.log(routeToNavegate);
-    router.push({name: routeToNavegate.toString()})
+    router.push({ name: routeToNavegate.toString() })
 }
 </script>
 <template>
     <main>
         <AsideBarComponent @emit-route="navegateTo" />
-        <RouterView />
+        <section class="views-section">
+            <RouterView />
+        </section>
     </main>
 </template>
 <style lang="scss" scoped>
@@ -24,5 +26,9 @@ main {
     width: 100%;
     @include flexDisplay(row, normal, normal);
 
+    .views-section{
+        width: 100%;
+        @include flexDisplay(row, center, center);
+    }
 }
 </style>

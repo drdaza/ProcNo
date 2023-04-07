@@ -13,7 +13,11 @@ export default class UserService{
 
         const getBbody = await response;
 
+        console.log(getBbody.data);
+        
+
         console.log(getBbody.status);
         
+        return getBbody.data;
     }
 }
