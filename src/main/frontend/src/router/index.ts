@@ -11,6 +11,11 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/login',
+      name: 'login',
+      component: ()=> import('../views/LoginView.vue')
+    },
+    {
       path: '/register',
       name: 'register',
       // route level code-splitting
@@ -35,6 +40,12 @@ const router = createRouter({
               name: 'dashbboardUser',
               component: ()=> import ('@/views/userViews/UserDashboardView.vue'),
               meta: {requireAuth: true}
+            },
+            {
+              path: 'MyProjects',
+              name: 'myProjects',
+              component: () => import('@/views/userViews/UserMyProjectsView.vue'),
+              meta: {requireAuth: true}
             }
           ]
         }
@@ -45,7 +56,7 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const loginStore = useAuthStore()
 
-  if(to.meta.requireAuth && !loginStore.isAuthenticate) return {name: 'home'}
+  if(to.meta.requireAuth && !loginStore.isAuthenticate) return {name: 'login'}
   if(to.name == 'session' && loginStore.roleLogin == 'ROLE_USER') router.push({name:'dashbboardUser'})
   /* if(to.name == 'sessionLayout' && loginStore.roleLogin == 'ROLE_ADMIN') router.push({name:'dashboardAdmin'}) */
 })

@@ -9,7 +9,7 @@ import RegisterComponent from '@/components/RegisterComponent.vue';
   </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../assets/styles/main' as *;
 main {
   width: 100%;

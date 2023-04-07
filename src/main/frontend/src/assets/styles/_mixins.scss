@@ -10,11 +10,16 @@
     grid-row-end: $RowEnd;
     grid-column-start: $ColumnInit;
     grid-column-end: $columnEnd;
-    border: 2px solid;
-    margin: 2em;
+
 }
 
 @mixin gridDisplay($FirstArgument, $SecondArgument) {
     display: grid;
     grid-template: repeat($FirstArgument, 1fr) / repeat($SecondArgument, 1fr);
+}
+@mixin wrapperStyle(){
+    width: 100%;
+    height: 100%;
+    
+    background-color: gainsboro;
 }

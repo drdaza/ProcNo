@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, watchEffect} from 'vue';
 import { useAuthStore } from '@/stores/AuthStore';
+import router from '@/router';
 
 const AuthStore = useAuthStore()
 let username = ref('')
@@ -35,8 +36,10 @@ const canRegister = computed(()=>{
     return (register.value && email.value===repeatEmail.value && password.value===repeatPassword.value) ? false : true
 })
 
-const makeRegister =()=>{
-    AuthStore.register(username.value,password.value,email.value)
+const makeRegister = async ()=>{
+    const status:Number|undefined = await AuthStore.register(username.value,password.value,email.value)
+
+    if (status==201) router.push({name: 'login'})
 }
 </script>
 <template>
@@ -114,7 +117,7 @@ const makeRegister =()=>{
         </div>
     </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../assets/styles/main' as *;
 .register-wrapper{
     width: 100%;
