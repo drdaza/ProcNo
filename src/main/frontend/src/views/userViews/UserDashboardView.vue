@@ -16,13 +16,18 @@ onBeforeMount(async () => {
 
 })
 
+const updateInfo = (isUpdated:boolean)=>{
 
+    if(isUpdated) userStore.obtainBasicInfo(authStore.username)
+
+}
 
 </script>
 <template>
     <div class="user-info-view-wrapper">
         <div class="info-space">
-            <UserInfoComponent :info="userStore.userBasicInfo" />
+            <UserInfoComponent :info="userStore.userBasicInfo"
+            @info-updated="updateInfo" />
         </div>
     </div>
 </template>

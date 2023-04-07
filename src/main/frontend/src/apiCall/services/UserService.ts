@@ -20,4 +20,14 @@ export default class UserService{
         
         return getBbody.data;
     }
+
+    public async EditUserInfo(username:String, info:any){
+        
+        axios.defaults.withCredentials = true;
+        const response = axios.put(this.baseUrl + `/user/edit/${username}`,info)
+
+        const getStatus = (await response).status
+
+        return getStatus;
+    }
 }

@@ -10,8 +10,7 @@
     grid-row-end: $RowEnd;
     grid-column-start: $ColumnInit;
     grid-column-end: $columnEnd;
-    border: 2px solid;
-    margin: 2em;
+
 }
 
 @mixin gridDisplay($FirstArgument, $SecondArgument) {
