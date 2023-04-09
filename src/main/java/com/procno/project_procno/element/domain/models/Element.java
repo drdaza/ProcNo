@@ -1,5 +1,7 @@
 package com.procno.project_procno.element.domain.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.procno.project_procno.complexElement.domain.models.ComplexElement;
+import com.procno.project_procno.container.domain.models.Container;
 
 @Entity
 @Table(name = "elements")
@@ -19,6 +25,10 @@ public class Element {
     @Column(name = "id_element")
     private Long id;
     private String name;
+    @ManyToMany(mappedBy = "elements")
+    private List<Container> containers;
+    @ManyToMany(mappedBy = "simpleElements")
+    private List<ComplexElement> complexElements;
 
     public Element() {
     }

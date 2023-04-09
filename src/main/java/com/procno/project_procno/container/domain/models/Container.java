@@ -25,9 +25,9 @@ public class Container {
     @Column(name = "id_container")
     private Long id;
     private String name;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Project> projects;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "container_has_elements",
     joinColumns = @JoinColumn(name = "container_id"),
     inverseJoinColumns = @JoinColumn(name = "element_id"))

@@ -8,10 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 import com.procno.project_procno.element.domain.models.Element;
 
 @Entity
+@Table(name = "complex_elements")
 @PrimaryKeyJoinColumn(name = "id_element")
 public class ComplexElement extends Element {
 
@@ -19,15 +21,15 @@ public class ComplexElement extends Element {
     @JoinTable(name = "complex_element_has_elements",
     joinColumns = @JoinColumn(name = "complex_element_id"),
     inverseJoinColumns = @JoinColumn(name = "element_id"))
-    private List<Element> elements;
+    private List<Element> simpleElements;
 
-    public ComplexElement(List<Element> elements) {
-        this.elements = elements;
+    public ComplexElement(List<Element> simpleElements) {
+        this.simpleElements = simpleElements;
     }
 
-    public ComplexElement(Long id, String name, List<Element> elements) {
+    public ComplexElement(Long id, String name, List<Element> simpleElements) {
         super(id, name);
-        this.elements = elements;
+        this.simpleElements = simpleElements;
     }
 
     @Override
