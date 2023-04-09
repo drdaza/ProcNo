@@ -1,26 +1,18 @@
 <script lang="ts" setup>
 import { useAuthStore } from '@/stores/AuthStore';
 import {useUserStore} from '@/stores/userStore';
-import { onBeforeMount } from 'vue';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
-
-onBeforeMount(async() => {
-    userStore.viewAllProjects(authStore.username)
-})
-
+const test = async()=>{
+    userStore.createProject(authStore.username)
+} 
 </script>
 <template>
-
-    
-    <h1 v-for="project of userStore.userAllProjects">
-        {{ project.title }}
-    </h1>
-    
+    <div>
+        <button @click="test()">create</button>
+    </div>
 </template>
 <style lang="scss" scoped>
-@use '../../assets/styles/main' as *;
-
-
+    
 </style>

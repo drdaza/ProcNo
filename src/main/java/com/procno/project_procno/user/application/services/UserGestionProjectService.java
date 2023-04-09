@@ -1,5 +1,7 @@
 package com.procno.project_procno.user.application.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import com.procno.project_procno.user.domain.models.User;
 import com.procno.project_procno.user.infrastructure.repositories.UserRepository;
 
 @Service
-public class UserCreateProjectService {
+public class UserGestionProjectService {
     @Autowired
     private UserRepository userRepository;
 
@@ -25,5 +27,10 @@ public class UserCreateProjectService {
 
         projectRepository.save(entity);
         userRepository.save(userDB);
+    }
+    public List<Project> findProjectsOfUser(String username){
+        User userDB = userRepository.findByUsername(username).orElseThrow(()-> new UserNotFoundException("user not found"));
+
+        return userDB.getProjects();
     }
 }

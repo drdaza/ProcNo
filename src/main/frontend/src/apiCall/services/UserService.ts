@@ -40,4 +40,13 @@ export default class UserService {
         console.log(getStatus);
 
     }
+
+    public async viewAllProjects(username:String){
+        axios.defaults.withCredentials = true;
+        const response = axios.get(this.baseUrl + `/user/allProjects/${username}`)
+
+        const getData = (await response).data
+
+        return getData
+    }
 }
