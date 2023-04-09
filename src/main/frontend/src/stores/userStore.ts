@@ -35,6 +35,16 @@ export const useUserStore = defineStore('userInfo',{
             
             return response
         },
+        async createProject(username:String){
+            const repository = new Repository('basic')
+            const service = repository.chooseUserService()
+
+            const info = {
+                title: 'my project',
+                description: 'is a new project'
+            }
+            await service?.createProject(username, info);
+        },
         encoder(info: String, password: String) {
             const infoEncode: String = window.btoa(`${info}:${password}`)
             return infoEncode

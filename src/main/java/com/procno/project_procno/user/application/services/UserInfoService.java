@@ -32,7 +32,6 @@ public class UserInfoService implements AdminService<EditProfilePayload, String>
 
     @Override
     public void delete(String id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
@@ -60,7 +59,6 @@ public class UserInfoService implements AdminService<EditProfilePayload, String>
 
     @Override
     public List<EditProfilePayload> listAll() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'listAll'");
     }
 

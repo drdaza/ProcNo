@@ -1,5 +1,7 @@
 package com.procno.project_procno.user.domain.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.procno.project_procno.profile.domain.models.Profile;
+import com.procno.project_procno.project.domain.models.Project;
 import com.procno.project_procno.role.domain.models.Role;
 
 @Entity
@@ -41,6 +44,10 @@ public class User {
     @OneToOne
     private Profile profile;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "projects_users",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private List<Project> projects;
+
     public User() {
     }
 
@@ -50,6 +57,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.roles = roles;
+        this.projects = new ArrayList<>();
     }
 
     public Long getId() {
@@ -98,6 +106,18 @@ public class User {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public void addProjects(Project project){
+        this.projects.add(project);
     }
 
 }
