@@ -25,6 +25,9 @@ public class Element {
     @Column(name = "id_element")
     private Long id;
     private String name;
+    private Boolean bold;
+    private String color;
+    private String fontColor;
     @ManyToMany(mappedBy = "elements")
     private List<Container> containers;
     @ManyToMany(mappedBy = "simpleElements")
@@ -53,5 +56,31 @@ public class Element {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Boolean getBold() {
+        return bold;
+    }
+
+    public void setBold(Boolean bold) {
+        this.bold = bold;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getFontColor() {
+        return fontColor;
+    }
+
+    public void setFontColor(String fontColor) {
+        this.fontColor = fontColor;
+    }
+
+    
 
 }
