@@ -11,11 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.procno.project_procno.element.domain.models.Element;
-import com.procno.project_procno.project.domain.models.Project;
 
 @Entity
 @Table(name = "containers")
@@ -25,9 +23,8 @@ public class Container {
     @Column(name = "id_container")
     private Long id;
     private String name;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Project> projects;
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "container_has_elements",
     joinColumns = @JoinColumn(name = "container_id"),
     inverseJoinColumns = @JoinColumn(name = "element_id"))
@@ -36,10 +33,10 @@ public class Container {
     public Container() {
     }
 
-    public Container(Long id, String name, List<Project> projects, List<Element> elements) {
+    public Container(Long id, String name, List<Element> elements) {
         this.id = id;
         this.name = name;
-        this.projects = projects;
+
         this.elements = elements;
     }
 
@@ -59,13 +56,6 @@ public class Container {
         this.name = name;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
 
     public List<Element> getElements() {
         return elements;

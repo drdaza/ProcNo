@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+
 import com.procno.project_procno.interfaces.services.AdminService;
 import com.procno.project_procno.interfaces.services.BasicService;
 import com.procno.project_procno.project.domain.exceptions.ProjectNotFoundException;
@@ -12,6 +13,7 @@ import com.procno.project_procno.project.infrastructure.repositories.ProjectRepo
 
 @Service
 public class ProjectGestionService implements AdminService<Project, Long>, BasicService<Project, Long>{
+
 
     private ProjectRepository projectRepository;
 
@@ -47,6 +49,7 @@ public class ProjectGestionService implements AdminService<Project, Long>, Basic
 
     @Override
     public Project save(Project entity) {
+
         return projectRepository.save(entity);
     }
     

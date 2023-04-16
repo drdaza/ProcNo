@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.procno.project_procno.container.domain.models.Container;
 
 @Entity
 @Table(name = "projects")
@@ -16,14 +19,17 @@ public class Project {
     @Column(nullable = false)
     private String title;
     private String description;
+    @OneToOne
+    private Container container;
     
     public Project() {
     }
 
-    public Project(Long id, String title, String description) {
+    public Project(Long id, String title, String description, Container container) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.container = container;
     }
 
     public Long getId() {
@@ -48,6 +54,14 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(Container container) {
+        this.container = container;
     }
     
     
