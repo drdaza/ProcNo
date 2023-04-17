@@ -36,9 +36,12 @@ public class Element {
     public Element() {
     }
 
-    public Element(Long id, String name) {
+    public Element(Long id, String name, Boolean bold, String color, String fontColor) {
         this.id = id;
         this.name = name;
+        this.bold = bold;
+        this.color = color;
+        this.fontColor = fontColor;
     }
 
     public Long getId() {

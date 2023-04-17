@@ -28,7 +28,7 @@ public class ComplexElement extends Element {
     }
 
     public ComplexElement(Long id, String name, List<Element> simpleElements) {
-        super(id, name);
+        super(id, name, true, "white", "black");
         this.simpleElements = simpleElements;
     }
 
