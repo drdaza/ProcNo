@@ -15,7 +15,24 @@
 
 @mixin gridDisplay($FirstArgument, $SecondArgument) {
     display: grid;
-    grid-template: repeat($FirstArgument, 1fr) / repeat($SecondArgument, 1fr);
+
+    @if $FirstArgument != auto-fit and $SecondArgument != auto-fit{
+        grid-template: repeat($FirstArgument, 1fr) / repeat($SecondArgument, 1fr);
+    }
+   
+    @if $SecondArgument == auto-fit{
+        grid-template-rows: repeat($FirstArgument, 1fr);
+        grid-template-columns: repeat($SecondArgument, minmax(100px, 1fr));
+    }
+
+    @if $FirstArgument == auto-fit{
+        grid-template-rows: repeat($FirstArgument, minmax(100px, 1fr));
+    }
+
+    @if $FirstArgument == auto-fit and $SecondArgument == auto-fit{
+        grid-template-rows: repeat($FirstArgument, minmax(100px, 1fr));
+        grid-template-columns: repeat($SecondArgument, minmax(100px, 1fr));
+    }
 }
 @mixin wrapperStyle(){
     width: 100%;
