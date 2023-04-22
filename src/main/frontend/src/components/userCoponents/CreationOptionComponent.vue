@@ -1,5 +1,12 @@
 <script lang="ts" setup>
+import { useAuthStore } from '@/stores/AuthStore';
+import { useUserStore } from '@/stores/userStore';
 
+const authStore = useAuthStore();
+const userStore = useUserStore();
+const test = async () => {
+    userStore.createProject(authStore.username)
+} 
 </script>
 <template>
     <div class="options-wrapper">
@@ -7,7 +14,7 @@
             <h1>Crear una nueva plantilla</h1>
         </div>
         <div class="creation-options-zone">
-            <div class="creation-option">Kanban</div>
+            <div class="creation-option" @click="test()">Kanban</div>
             <div class="creation-option">Hoja en blanco</div>
             <div class="creation-option">Entrenamientos</div>
             <div class="creation-option">Mas...Proximamente</div>

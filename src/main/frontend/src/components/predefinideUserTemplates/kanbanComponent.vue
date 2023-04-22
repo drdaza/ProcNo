@@ -1,9 +1,11 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps({
+    kanban:{
+        type: Object
+    }
+})
+</script>
 <template>
-    <div>
-        
-    </div>
+
 </template>
-<style lang="scss" scoped>
-    
-</style>
+<style lang="scss" scoped></style>

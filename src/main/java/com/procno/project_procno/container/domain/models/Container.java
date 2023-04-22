@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.procno.project_procno.element.domain.models.Element;
+import com.procno.project_procno.typeOfContainer.domain.models.TypeOfContainer;
 
 @Entity
 @Table(name = "containers")
@@ -24,19 +25,25 @@ public class Container {
     private Long id;
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "container_has_elements",
     joinColumns = @JoinColumn(name = "container_id"),
     inverseJoinColumns = @JoinColumn(name = "element_id"))
     private List<Element> elements;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "containers_types_of_containers",
+    joinColumns = @JoinColumn(name = "container_id"),
+    inverseJoinColumns = @JoinColumn(name = "type_container_id"))
+    private List<TypeOfContainer> types;
+
     public Container() {
     }
 
-    public Container(Long id, String name, List<Element> elements) {
+    public Container(Long id, String name, List<Element> elements, List<TypeOfContainer> types) {
         this.id = id;
         this.name = name;
-
+        this.types = types;
         this.elements = elements;
     }
 
@@ -65,4 +72,13 @@ public class Container {
         this.elements = elements;
     }
 
+    public List<TypeOfContainer> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<TypeOfContainer> types) {
+        this.types = types;
+    }
+
+    
 }
