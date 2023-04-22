@@ -5,7 +5,8 @@ import type EditProfilePayload from "@/apiCall/payloads/EditProfilePayload";
 export const useUserStore = defineStore('userInfo',{
     state: ()=>({
         userBasicInfo:{},
-        userAllProjects:[] as any[]
+        userAllProjects:[] as any[], 
+        temporalProject: {} as any 
     }),
     actions:{
         async obtainBasicInfo(username : String){
@@ -45,6 +46,8 @@ export const useUserStore = defineStore('userInfo',{
                 description: 'is a new project'
             }
             await service?.createProject(username, info);
+
+            await service?.viewAllProjects(username)
         },
         async viewAllProjects(username:String){
             const repository = new Repository('basic')
@@ -55,6 +58,11 @@ export const useUserStore = defineStore('userInfo',{
             this.userAllProjects = response;
 
             return response;
+        },
+        findProjectInfo(idProject:Number){
+            const element:any = this.userAllProjects.find(project => project.id === idProject)
+
+            this.temporalProject = element
         },
         encoder(info: String, password: String) {
             const infoEncode: String = window.btoa(`${info}:${password}`)
