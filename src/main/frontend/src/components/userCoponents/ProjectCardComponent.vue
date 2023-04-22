@@ -5,9 +5,15 @@ const props = defineProps({
         required: true
     }
 })
+
+const emits = defineEmits(['emitNavigationData'])
+
+const emitNavigationData = ()=>{
+    emits('emitNavigationData', { idProject: props.project.id, containerType: props.project.container.types[0].name})
+}
 </script>
 <template>
-    <v-card class="mx-auto" max-width="450">
+    <v-card @click="emitNavigationData()" class="mx-auto" max-width="450">
         <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
             cover></v-img>
         <v-card-title>{{ project.title }}</v-card-title>

@@ -3,20 +3,27 @@ import { useAuthStore } from '@/stores/AuthStore';
 import { useUserStore } from '@/stores/userStore';
 import { onBeforeMount } from 'vue';
 import ProjectCardComponent from '@/components/userCoponents/ProjectCardComponent.vue';
+import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
+const router = useRouter();
 
 onBeforeMount(async () => {
     userStore.viewAllProjects(authStore.username)
 })
 
+const navigateTo = (navigationData: any)=>{
+    console.log(navigationData.idProject);
+    console.log(navigationData.containerType);
+    router.push({name: 'projectView', params: { idProject: navigationData.idProject, typeContainer: navigationData.containerType }})
+}
 </script>
 <template>
     <div class="projects-grid">
         
         <div v-for="project of userStore.userAllProjects">
-            <ProjectCardComponent :project="project" />
+            <ProjectCardComponent @emit-navigation-data="navigateTo" :project="project" />
         </div>
     </div>
 </template>

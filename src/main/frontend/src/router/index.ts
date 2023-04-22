@@ -36,7 +36,7 @@ const router = createRouter({
           meta: {requireAuth: true},
           children:[
             {
-              path: 'dashboard',
+              path: 'Dashboard',
               name: 'dashbboardUser',
               component: ()=> import ('@/views/userViews/UserDashboardView.vue'),
               meta: {requireAuth: true}
@@ -48,10 +48,24 @@ const router = createRouter({
               meta: {requireAuth: true}
             },
             {
-              path: 'newProject',
+              path: 'NewProject',
               name: 'newProject',
               component: () => import('@/views/userViews/UserCreateProjectView.vue'),
               meta: {requireAuth: true}
+            },
+            {
+              path: 'Project/:idProject/container/:typeContainer',
+              name: 'projectView',
+              component: () => import('@/views/projectTemplate/ProjectTemplate.vue'),
+              meta: {requireAuth: true},
+              props: route => ({idProject: route.params.idProject, typeContainer: route.params.typeContainer}),
+              children: [
+                {
+                  path: 'template',
+                  name: 'kanbanTemplateView',
+                  component: () => import('@/views/projectTemplate/KanbanTemplateView.vue')
+                }
+              ]
             }
           ]
         }
@@ -64,6 +78,7 @@ router.beforeEach((to, from) => {
 
   if(to.meta.requireAuth && !loginStore.isAuthenticate) return {name: 'login'}
   if(to.name == 'session' && loginStore.roleLogin == 'ROLE_USER') router.push({name:'dashbboardUser'})
+  if(to.name == 'projectView' && to.params.typeContainer == 'kanban') router.push({name: 'kanbanTemplateView', params: { idProject: to.params.idProject, typeContainer: to.params.typeContainer}})
   /* if(to.name == 'sessionLayout' && loginStore.roleLogin == 'ROLE_ADMIN') router.push({name:'dashboardAdmin'}) */
 })
 export default router
