@@ -15,9 +15,9 @@ onBeforeMount(() => {
 })
 
 const addTask = (emit:any)=>{
-    const payload = new CreateTaskPayload('pasear al perro', 'pasear', 'box', 'red','white')
+    const payload = new CreateTaskPayload(emit.payload.name, emit.payload.description, 'box', emit.payload.color,emit.payload.fonColor)
 
-    userStore.addNewTask(authStore.username, parseInt(route.params.idProject as string), userStore.temporalProject.id, emit, payload)
+    userStore.addNewTask(authStore.username, parseInt(route.params.idProject as string), userStore.temporalProject.id, emit.stateBox, payload)
 }
 const editTask = (emit:any)=>{
     console.log(emit.idState);
