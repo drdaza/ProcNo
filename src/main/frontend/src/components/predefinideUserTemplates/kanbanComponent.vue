@@ -6,14 +6,18 @@ const props = defineProps({
         type: Object as any
     }
 })
-const test = (emit:any)=>{
-    console.log(emit); 
+const emits = defineEmits(['addTaskEmit', 'editTaskEmit'])
+const addTask = (emit:any)=>{
+    emits('addTaskEmit', emit) 
+}
+const editTask = (emit:any)=>{
+    emits('editTaskEmit', emit)
 } 
 </script>
 <template>
     <div class="kanban-container">
         <div class="state-box-space" v-for="state of kanban.container.elements">
-            <StateBoxes @emit-add-element="test" :state="state" />
+            <StateBoxes @emit-edit-task="editTask" @emit-add-element="addTask" :state="state" />
         </div>
     </div>
 </template>
