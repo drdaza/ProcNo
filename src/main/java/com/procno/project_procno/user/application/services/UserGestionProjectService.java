@@ -59,15 +59,15 @@ public class UserGestionProjectService {
 
         List<Element> elements = new ArrayList<>();
 
-        TypeOfElement type = new TypeOfElement(4L,"box", false, "white", "black");
+        TypeOfElement type = new TypeOfElement(4L,"box");
 
-        Element elementToDo = new Element(null, "ToDo", new ArrayList<>(), null, type);
-        Element elementDone = new Element(null, "Done", new ArrayList<>(), null, type);
-        Element elementDoing = new Element(null, "Done", new ArrayList<>(), null, type);
+        Element elementToDo = new Element(null, "ToDo",false, "white", "black", new ArrayList<>(), null, type);
+        Element elementDone = new Element(null, "Done",false, "white", "black", new ArrayList<>(), null, type);
+        Element elementDoing = new Element(null, "Done",false, "white", "black", new ArrayList<>(), null, type);
         elements.add( elementToDo);
         elements.add( elementDone);
         List<Element> subElements = elementDoing.getSubElements();
-        Element subBox = new Element(null, "walk", new ArrayList<>(), null, type);
+        Element subBox = new Element(null, "walk",false, "white", "black", new ArrayList<>(), null, type);
         subElements.add( subBox);
         elementDoing.setSubElements(subElements);
         elements.add( elementDoing);

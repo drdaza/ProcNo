@@ -38,7 +38,7 @@ const editTask = (idTask:Number)=>{
     width: 100%;
     height: 100%;
     @include flexDisplay(column, normal, center);
-    background-color: v-bind('state.typeOfElement.color');
+    background-color: v-bind('state.color');
     border-radius: 10px;
 
     .body-state-box-zone {
@@ -47,7 +47,7 @@ const editTask = (idTask:Number)=>{
         @include flexDisplay(row, flex-start, flex-start);
         gap: 2%;
         flex-wrap: wrap;
-        background-color: v-bind('state.typeOfElement.color');
+        background-color: v-bind('state.color');
         border-radius: 10px;
 
         .add-zone {
@@ -78,7 +78,7 @@ const editTask = (idTask:Number)=>{
         width: 100%;
         height: 100%;
         @include flexDisplay(column, normal, center);
-        background-color: v-bind('state.typeOfElement.color');
+        background-color: v-bind('state.color');
         border-radius: 10px;
 
         .body-state-box-zone {
@@ -86,7 +86,7 @@ const editTask = (idTask:Number)=>{
             height: 100%;
             @include flexDisplay(column, normal, center);
             gap: 2%;
-            background-color: v-bind('state.typeOfElement.color');
+            background-color: v-bind('state.color');
             border-radius: 10px;
 
             .add-zone {

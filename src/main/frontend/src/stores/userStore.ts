@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import Repository from "@/apiCall/Repository";
 import type EditProfilePayload from "@/apiCall/payloads/EditProfilePayload";
+import type CreateTaskPayload from "@/apiCall/payloads/CreateTaskPayload";
 
 export const useUserStore = defineStore('userInfo',{
     state: ()=>({
@@ -58,6 +59,16 @@ export const useUserStore = defineStore('userInfo',{
             this.userAllProjects = response;
 
             return response;
+        },
+        async addNewTask(username:String, idProject:Number, idContainer:Number, idState:Number, payload:CreateTaskPayload){
+            const repository = new Repository('basic')
+            const service = repository.chooseUserService()
+
+            const response = await service?.addNewTask(idProject,idContainer,idState,payload)
+
+            await this.viewAllProjects(username)
+
+            this.findProjectInfo(idProject)
         },
         findProjectInfo(idProject:Number){
             const element:any = this.userAllProjects.find(project => project.id === idProject)

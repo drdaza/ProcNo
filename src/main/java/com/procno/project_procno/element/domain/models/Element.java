@@ -27,6 +27,9 @@ public class Element {
     @Column(name = "id_element")
     private Long id;
     private String name;
+    private Boolean bold;
+    private String color;
+    private String fontColor;
     @OneToOne()
     private TypeOfElement typeOfElement;
     @ManyToMany(mappedBy = "elements")
@@ -41,13 +44,16 @@ public class Element {
     public Element() {
     }
 
-    public Element(Long id, String name,List<Element> subElements,
+    public Element(Long id, String name, Boolean bold, String color, String fontColor,List<Element> subElements,
             List<ElementInfo> info, TypeOfElement typeOfElement) {
         this.id = id;
         this.name = name;
         this.subElements = subElements;
         this.info = info;
         this.typeOfElement = typeOfElement;
+        this.bold = bold;
+        this.color = color;
+        this.fontColor = fontColor;         
     }
 
     public Long getId() {
@@ -80,6 +86,32 @@ public class Element {
 
     public void setInfo(List<ElementInfo> info) {
         this.info = info;
+    }
+
+    
+
+    public Boolean getBold() {
+        return bold;
+    }
+
+    public void setBold(Boolean bold) {
+        this.bold = bold;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getFontColor() {
+        return fontColor;
+    }
+
+    public void setFontColor(String fontColor) {
+        this.fontColor = fontColor;
     }
 
     public TypeOfElement getTypeOfElement() {

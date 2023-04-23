@@ -30,7 +30,7 @@ const editTastEmit = ()=>{
     @include flexDisplay(column, normal, center);
     width: 100%;
     height: 100%;
-    background-color: v-bind('task.typeOfElement.color');
+    background-color: v-bind('task.color');
     .principal-zone{
         width: 100%;
         display: grid;

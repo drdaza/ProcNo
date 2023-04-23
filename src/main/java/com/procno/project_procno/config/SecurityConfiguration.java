@@ -42,6 +42,7 @@ public class SecurityConfiguration {
                 .authorizeRequests(auth -> auth
                         .antMatchers("/api/register").permitAll()
                         .antMatchers("/api/login").hasAnyRole("USER", "ADMIN")
+                        .antMatchers("/api/user/**").hasAnyRole("USER")
                         .antMatchers("/api/templates/delete").hasRole("ADMIN")
                         .anyRequest()
                         .authenticated())

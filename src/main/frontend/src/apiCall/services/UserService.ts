@@ -1,4 +1,5 @@
 import axios from "axios"
+import type CreateTaskPayload from "../payloads/CreateTaskPayload";
 
 export default class UserService {
     private baseUrl: String
@@ -48,5 +49,13 @@ export default class UserService {
         const getData = (await response).data
 
         return getData
+    }
+
+    public async addNewTask(idProject:Number, idContainer:Number, idState:Number, payload:CreateTaskPayload){
+        axios.defaults.withCredentials = true;
+        const response = axios.put(this.baseUrl + `/user/project/${idProject}/container/${idContainer}/state/${idState}`, payload)
+
+        const getData = (await response).data
+        
     }
 }
