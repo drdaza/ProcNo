@@ -31,9 +31,9 @@ export default class UserService {
         return getStatus;
     }
 
-    public async createProject(username: String, info: any) {
+    public async createProject(username: String, info: any, typeProject: String) {
         axios.defaults.withCredentials = true;
-        const response = axios.post(this.baseUrl + `/user/createProject/${username}`, info)
+        const response = axios.post(this.baseUrl + `/user/createProject/${username}/${typeProject}`, info)
 
         const getStatus = (await response).data
 

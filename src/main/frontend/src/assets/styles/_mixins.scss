@@ -27,6 +27,7 @@
 
     @if $FirstArgument == auto-fit{
         grid-template-rows: repeat($FirstArgument, minmax(100px, 1fr));
+        grid-template-columns: repeat($SecondArgument, 1fr);
     }
 
     @if $FirstArgument == auto-fit and $SecondArgument == auto-fit{

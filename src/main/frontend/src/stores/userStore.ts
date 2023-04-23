@@ -37,7 +37,7 @@ export const useUserStore = defineStore('userInfo',{
             
             return response
         },
-        async createProject(username:String){
+        async createProject(username:String, typeProject:String){
             const repository = new Repository('basic')
             const service = repository.chooseUserService()
 
@@ -45,7 +45,7 @@ export const useUserStore = defineStore('userInfo',{
                 title: 'my project',
                 description: 'is a new project'
             }
-            await service?.createProject(username, info);
+            await service?.createProject(username, info, typeProject);
 
             await service?.viewAllProjects(username)
         },

@@ -27,11 +27,11 @@ public class UserGestionProjectController {
     }
 
     
-    @PostMapping(value = "/createProject/{username}")
-    public ResponseEntity<Map<String, String>> createPorject(@RequestBody Project project, @PathVariable String username){
+    @PostMapping(value = "/createProject/{username}/{typeProject}")
+    public ResponseEntity<Map<String, String>> createPorject(@RequestBody Project project, @PathVariable String username, @PathVariable String typeProject){
         try {
             
-            userGestionProjectService.userCreateProject(username, project);
+            userGestionProjectService.userCreateProject(username, project, typeProject);
 
             Map<String, String> json = new HashMap<>();
 

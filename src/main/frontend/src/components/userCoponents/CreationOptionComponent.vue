@@ -5,7 +5,7 @@ import { useUserStore } from '@/stores/userStore';
 const authStore = useAuthStore();
 const userStore = useUserStore();
 const test = async () => {
-    userStore.createProject(authStore.username)
+    userStore.createProject(authStore.username, 'Kanban')
 } 
 </script>
 <template>

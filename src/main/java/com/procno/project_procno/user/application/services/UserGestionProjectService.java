@@ -33,12 +33,13 @@ public class UserGestionProjectService {
     @Autowired
     private ElementRepository elementRepository;
 
-    public void userCreateProject(String username, Project entity){
+    public void userCreateProject(String username, Project entity, String typeProject){
 
         User userDB = userRepository.findByUsername(username).orElseThrow(()-> new UserNotFoundException("user not found"));
 
-
-        Project projectToDB = userCreateAkanbanProject(entity);
+        Project projectToDB = new Project();
+        if(typeProject.equals("Kanban")) projectToDB = userCreateAkanbanProject(entity);
+        
 
         containerRepository.save(projectToDB.getContainer());
 
@@ -60,10 +61,13 @@ public class UserGestionProjectService {
 
         TypeOfElement type = new TypeOfElement(4L,"box", false, "white", "black");
 
-        Element elementToContainer = new Element(null, "container", new ArrayList<>(), null, type);
-        elements.add( elementToContainer);
+        Element elementToDo = new Element(null, "ToDo", new ArrayList<>(), null, type);
+        Element elementDone = new Element(null, "Done", new ArrayList<>(), null, type);
+        elements.add( elementToDo);
+        elements.add( elementDone);
 
-        elementRepository.save(elementToContainer);
+        elementRepository.save(elementToDo);
+        elementRepository.save(elementDone);
 
         List<TypeOfContainer> typeOfContainer = new ArrayList<>();
 

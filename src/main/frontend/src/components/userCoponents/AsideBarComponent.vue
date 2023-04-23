@@ -109,4 +109,11 @@ const emitRoute = (routeToNavigate: String)=>{
         transition: 1s;
 
     }
-}</style>
+}
+i:hover{
+    cursor: pointer;
+}
+h1:hover{
+    cursor: pointer;
+}
+</style>
