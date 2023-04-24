@@ -1,0 +1,43 @@
+@mixin flexDisplay($direction, $just, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $just;
+    align-items: $align;
+}
+
+@mixin border($RowInit, $ColumnInit , $RowEnd, $columnEnd) {
+    grid-row-start: $RowInit;
+    grid-row-end: $RowEnd;
+    grid-column-start: $ColumnInit;
+    grid-column-end: $columnEnd;
+
+}
+
+@mixin gridDisplay($FirstArgument, $SecondArgument) {
+    display: grid;
+
+    @if $FirstArgument != auto-fit and $SecondArgument != auto-fit{
+        grid-template: repeat($FirstArgument, 1fr) / repeat($SecondArgument, 1fr);
+    }
+   
+    @if $SecondArgument == auto-fit{
+        grid-template-rows: repeat($FirstArgument, 1fr);
+        grid-template-columns: repeat($SecondArgument, minmax(100px, 1fr));
+    }
+
+    @if $FirstArgument == auto-fit{
+        grid-template-rows: repeat($FirstArgument, minmax(100px, 1fr));
+        grid-template-columns: repeat($SecondArgument, 1fr);
+    }
+
+    @if $FirstArgument == auto-fit and $SecondArgument == auto-fit{
+        grid-template-rows: repeat($FirstArgument, minmax(100px, 1fr));
+        grid-template-columns: repeat($SecondArgument, minmax(100px, 1fr));
+    }
+}
+@mixin wrapperStyle(){
+    width: 100%;
+    height: 100%;
+    
+    background-color: gainsboro;
+}
