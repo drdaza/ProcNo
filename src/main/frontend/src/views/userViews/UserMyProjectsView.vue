@@ -13,33 +13,46 @@ onBeforeMount(async () => {
     userStore.viewAllProjects(authStore.username)
 })
 
-const navigateTo = (navigationData: any)=>{
-    router.push({name: 'projectView', params: { idProject: navigationData.idProject, typeContainer: navigationData.containerType }})
+const navigateTo = (navigationData: any) => {
+    router.push({ name: 'projectView', params: { idProject: navigationData.idProject, typeContainer: navigationData.containerType } })
 }
 </script>
 <template>
-    <div class="projects-grid">
-        
-        <div v-for="project of userStore.userAllProjects">
-            <ProjectCardComponent @emit-navigation-data="navigateTo" :project="project" />
+    <div class="my-projects-wrapper">
+        <h1>Mis proyectos</h1>
+        <div class="projects-grid">
+
+            <div v-for="project of userStore.userAllProjects">
+                <ProjectCardComponent @emit-navigation-data="navigateTo" :project="project" />
+            </div>
         </div>
     </div>
 </template>
 <style lang="scss" scoped>
 @use '../../assets/styles/main' as *;
 
-.projects-grid {
+.my-projects-wrapper {
+    @include flexDisplay(column, normal, center);
     width: 100%;
-    height: 100%;
-    @include gridDisplay(auto-fit, 1);
-    align-items: center;
-}
-@media (min-width: 800px) {
+
     .projects-grid {
-    width: 100%;
-    height: 100%;
-    @include gridDisplay(auto-fit, 2);
-    align-items: center;
+        width: 100%;
+        height: 80%;
+        @include gridDisplay(auto-fit, 1);
+        align-items: center;
+    }
 }
-}
-</style>
+
+@media (min-width: 800px) {
+    .my-projects-wrapper {
+        @include flexDisplay(column, normal, center);
+        width: 100%;
+
+        .projects-grid {
+            width: 100%;
+            height: 100%;
+            @include gridDisplay(auto-fit, 2);
+            align-items: center;
+        }
+    }
+}</style>

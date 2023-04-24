@@ -14,7 +14,7 @@ const emitNavigationData = ()=>{
 </script>
 <template>
     <v-card @click="emitNavigationData()" class="mx-auto" max-width="450">
-        <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        <v-img class="align-end text-white" height="200" src="https://thumbs.dreamstime.com/b/fondo-blanco-del-ladrillo-textura-y-de-la-pared-133036144.jpg"
             cover></v-img>
         <v-card-title>{{ project.title }}</v-card-title>
     </v-card>
