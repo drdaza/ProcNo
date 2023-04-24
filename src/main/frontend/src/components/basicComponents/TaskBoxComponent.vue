@@ -19,7 +19,7 @@ const editTastEmit = ()=>{
             <v-icon :icon="'mdi-dots-vertical'" :size="'xs'" @click="editTastEmit()"></v-icon>
         </div>
         <div class="description-zone">
-            <p>description</p>
+            <p v-for="info of task.info">{{ info.content }}</p>
         </div>
     </div>
 </template>
@@ -31,6 +31,7 @@ const editTastEmit = ()=>{
     width: 100%;
     height: 100%;
     background-color: v-bind('task.color');
+    color: v-bind('task.fontColor');
     .principal-zone{
         width: 100%;
         display: grid;

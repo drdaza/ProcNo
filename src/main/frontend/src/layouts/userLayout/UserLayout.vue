@@ -13,7 +13,7 @@ const navegateTo = (routeToNavegate: String) => {
 </script>
 <template>
     <main>
-        <AsideBarComponent @emit-route="navegateTo" />
+        <AsideBarComponent class="fix-aside" @emit-route="navegateTo" />
         <section class="views-section">
             <RouterView />
         </section>
@@ -30,5 +30,6 @@ main {
         width: 100%;
         @include flexDisplay(row, center, center);
     }
+
 }
 </style>

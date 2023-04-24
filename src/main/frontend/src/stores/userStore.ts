@@ -70,6 +70,17 @@ export const useUserStore = defineStore('userInfo',{
 
             this.findProjectInfo(idProject)
         },
+        async changeTaskOfState(username:String,idProject:Number, idContainer:Number, idStateFrom:Number, idStateTo:Number,idTask:Number){
+            const repository = new Repository('basic')
+            const service = repository.chooseUserService()
+
+            const response = await service?.changeTaskOfState(idProject, idContainer, idStateFrom, idStateTo, idTask)
+
+            await this.viewAllProjects(username)
+
+            this.findProjectInfo(idProject)
+
+        },
         findProjectInfo(idProject:Number){
             const element:any = this.userAllProjects.find(project => project.id === idProject)
 

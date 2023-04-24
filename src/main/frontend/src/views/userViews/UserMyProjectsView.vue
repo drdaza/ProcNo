@@ -14,8 +14,6 @@ onBeforeMount(async () => {
 })
 
 const navigateTo = (navigationData: any)=>{
-    console.log(navigationData.idProject);
-    console.log(navigationData.containerType);
     router.push({name: 'projectView', params: { idProject: navigationData.idProject, typeContainer: navigationData.containerType }})
 }
 </script>
@@ -33,7 +31,15 @@ const navigateTo = (navigationData: any)=>{
 .projects-grid {
     width: 100%;
     height: 100%;
-    @include gridDisplay(2, 2);
+    @include gridDisplay(auto-fit, 1);
     align-items: center;
+}
+@media (min-width: 800px) {
+    .projects-grid {
+    width: 100%;
+    height: 100%;
+    @include gridDisplay(auto-fit, 2);
+    align-items: center;
+}
 }
 </style>

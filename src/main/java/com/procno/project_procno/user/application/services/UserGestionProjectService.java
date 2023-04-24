@@ -62,7 +62,7 @@ public class UserGestionProjectService {
         TypeOfElement type = new TypeOfElement(4L,"box");
 
         Element elementToDo = new Element(null, "ToDo",false, "white", "black", new ArrayList<>(), null, type);
-        Element elementDone = new Element(null, "Done",false, "white", "black", new ArrayList<>(), null, type);
+        Element elementDone = new Element(null, "Doing",false, "white", "black", new ArrayList<>(), null, type);
         Element elementDoing = new Element(null, "Done",false, "white", "black", new ArrayList<>(), null, type);
         elements.add( elementToDo);
         elements.add( elementDone);

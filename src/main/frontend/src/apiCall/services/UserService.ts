@@ -58,4 +58,12 @@ export default class UserService {
         const getData = (await response).data
         
     }
+
+    public async changeTaskOfState(idProject:Number, idContainer:Number, idStateFrom:Number, idStateTo:Number,idTask:Number){
+
+        axios.defaults.withCredentials = true;
+        const response = axios.put(this.baseUrl + `/user/project/${idProject}/container/${idContainer}/fromState/${idStateFrom}/toState/${idStateTo}/task/${idTask}`)
+
+        const getData = (await response).data
+    } 
 }

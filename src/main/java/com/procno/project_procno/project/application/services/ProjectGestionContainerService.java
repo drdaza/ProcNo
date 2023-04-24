@@ -1,5 +1,6 @@
 package com.procno.project_procno.project.application.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import com.procno.project_procno.container.infrastructure.repositories.Container
 import com.procno.project_procno.element.domain.models.Element;
 import com.procno.project_procno.element.domain.payloads.TaskCreatePayload;
 import com.procno.project_procno.element.infrastructure.repositories.ElementRepository;
+import com.procno.project_procno.elemetInfo.domain.models.ElementInfo;
+import com.procno.project_procno.elemetInfo.infrastructure.repositories.ElementInfoRepository;
 import com.procno.project_procno.project.domain.models.Project;
 import com.procno.project_procno.project.infrastructure.repositories.ProjectRepository;
 import com.procno.project_procno.typeOfElement.domain.models.TypeOfElement;
@@ -26,6 +29,8 @@ public class ProjectGestionContainerService {
     private ElementRepository elementRepository;
     @Autowired 
     private TypeOfElementRepository typeOfElementRepository;
+    @Autowired
+    private ElementInfoRepository elementInfoRepository;
 
     public void addNewTaskToState(Long idProject,Long idContainer, Long idState, TaskCreatePayload payload){
         Project projectDB = projectRepository.findById(idProject).orElseThrow(); 
@@ -91,7 +96,11 @@ public class ProjectGestionContainerService {
     private List<Element> findState(List<Element> states, Element StateToFind, TaskCreatePayload payload){
 
         TypeOfElement type = typeOfElementRepository.findByName(payload.getTypeElement()).orElseThrow();
-        Element taskToAdd = new Element(null, payload.getName(), false, payload.getColor(), payload.getFontColor(), null, null, type);
+        List<ElementInfo> info = new ArrayList<>();
+        ElementInfo descriptionTask = new ElementInfo(null, payload.getDescription());
+        elementInfoRepository.save(descriptionTask);
+        info.add(descriptionTask);
+        Element taskToAdd = new Element(null, payload.getName(), false, payload.getColor(), payload.getFontColor(), null, info, type);
 
         for (Element state : states) {
             if(state.equals(StateToFind)){
@@ -101,6 +110,7 @@ public class ProjectGestionContainerService {
             }
         }
 
+        
         elementRepository.save(taskToAdd);
         return states;
     }

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import AddNewElement from './AddNewElement.vue'
 import TaskBoxComponent from './TaskBoxComponent.vue'
 const props = defineProps({
@@ -6,7 +7,6 @@ const props = defineProps({
         type: Object as any
     }
 })
-
 const emits = defineEmits(['emitAddElement','emitEditTask'])
 
 const emitAddElement = () => {
@@ -23,7 +23,7 @@ const editTask = (idTask:Number)=>{
         </div>
         <div class="body-state-box-zone">
             <div class="task-boxes-space" v-for="taskBox of state.subElements">
-                <TaskBoxComponent :task="taskBox" @edit-task-emit="editTask" />
+                <TaskBoxComponent :task="taskBox" @edit-task-emit="editTask"/>
             </div>
             <div class="add-zone">
                 <AddNewElement @addnew-element="emitAddElement" />
