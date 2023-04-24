@@ -27,14 +27,14 @@ public class ProjectGestionContainerService {
     @Autowired 
     private TypeOfElementRepository typeOfElementRepository;
 
-    public void addNewTaskToState(long idProject,Long idContainer, Long idState, TaskCreatePayload payload){
-        Project projectDB = projectRepository.findById(idProject).orElseThrow(); //usco el projecto en la base de datos
+    public void addNewTaskToState(Long idProject,Long idContainer, Long idState, TaskCreatePayload payload){
+        Project projectDB = projectRepository.findById(idProject).orElseThrow(); 
 
-        Container containerOfProjectDB = projectDB.getContainer(); // saco su contenedor
+        Container containerOfProjectDB = projectDB.getContainer(); 
 
-        Element stateDB = elementRepository.findById(idState).orElseThrow(); // usco el estado por su id en la base de datos
+        Element stateDB = elementRepository.findById(idState).orElseThrow(); 
 
-        List<Element> states = containerOfProjectDB.getElements(); // saco la lista de states del contenedor para poder buscar el state encontrado en la DB
+        List<Element> states = containerOfProjectDB.getElements(); 
 
         containerOfProjectDB.setElements(findState(states, stateDB, payload));
         
@@ -44,6 +44,49 @@ public class ProjectGestionContainerService {
 
         projectRepository.save(projectDB);
 
+    }
+    public void taskChangeOfState(Long idProject, Long idContainer, Long idStateFrom, Long idStateTo, Long idTask ){
+        Project projectDB = projectRepository.findById(idProject).orElseThrow(); 
+
+        Container containerOfProjectDB = projectDB.getContainer(); 
+
+        Element taskDB = elementRepository.findById(idTask).orElseThrow();
+
+        List<Element> actualizedStates = moveTask(containerOfProjectDB.getElements(), taskDB, idStateFrom, idStateTo);
+
+        containerOfProjectDB.setElements(actualizedStates);
+
+        projectDB.setContainer(containerOfProjectDB);
+
+        containerRepository.save(containerOfProjectDB);
+
+        projectRepository.save(projectDB);
+
+    }
+    private List<Element> moveTask(List<Element> states, Element task, Long idStateFrom, Long idStateTo){
+
+        Element stateFromDB = elementRepository.findById(idStateFrom).orElseThrow();
+
+        List<Element> tasksStateFrom = stateFromDB.getSubElements();
+        
+        tasksStateFrom.removeIf(taskSt -> taskSt.equals(task));
+
+        for (Element state : states) {
+
+            if(state.getId()==idStateFrom){
+                 state.setSubElements(tasksStateFrom);
+                }
+
+            if(state.getId()==idStateTo){
+                List<Element> tasksStateTo = state.getSubElements();
+
+                tasksStateTo.add(task);
+
+                state.setSubElements(tasksStateTo);
+            }
+        }
+
+        return states;
     }
     private List<Element> findState(List<Element> states, Element StateToFind, TaskCreatePayload payload){
 

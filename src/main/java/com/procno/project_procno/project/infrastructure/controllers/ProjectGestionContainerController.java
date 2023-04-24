@@ -41,4 +41,24 @@ public class ProjectGestionContainerController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
         }
     }
+
+    @PutMapping(value = "/project/{idProject}/container/{idContainer}/fromState/{idStateFrom}/toState/{idStateTo}/task/{idTask}")
+    public ResponseEntity<Map<String, String>> changeTaskOfState(@PathVariable Long idProject, @PathVariable Long idContainer, @PathVariable Long idStateFrom, @PathVariable Long idStateTo, @PathVariable Long idTask){
+        try {
+            projectGestionContainerService.taskChangeOfState(idProject, idContainer, idStateFrom, idStateTo, idTask);
+
+            Map<String, String> json = new HashMap<>();
+
+            json.put("message", "succesfully task added");
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(json);
+        } catch (Exception e) {
+
+            Map<String, String> json = new HashMap<>();
+
+            json.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+        }
+    }
+    
 }
