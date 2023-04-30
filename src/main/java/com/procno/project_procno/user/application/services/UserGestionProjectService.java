@@ -96,6 +96,12 @@ public class UserGestionProjectService {
         Element elementDayFour = new Element(null, "Dia 4",false, "white", "black", new ArrayList<>(), null, type);
         Element elementDayFive = new Element(null, "Dia 5",false, "white", "black", new ArrayList<>(), null, type);
 
+        elements.add(elementDayOne);
+        elements.add(elementDayTwo);
+        elements.add(elementDayThree);
+        elements.add(elementDayFour);
+        elements.add(elementDayFive);
+
         elementRepository.save(elementDayOne);
         elementRepository.save(elementDayTwo);
         elementRepository.save(elementDayThree);
