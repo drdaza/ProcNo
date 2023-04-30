@@ -64,6 +64,11 @@ const router = createRouter({
                   path: 'template',
                   name: 'kanbanTemplateView',
                   component: () => import('@/views/projectTemplate/KanbanTemplateView.vue')
+                },
+                {
+                  path: 'workoutTemplate',
+                  name: 'workoutPTemplateView',
+                  component: () => import('@/views/projectTemplate/WorkoutPTemplateView.vue')
                 }
               ]
             }
@@ -79,6 +84,7 @@ router.beforeEach((to, from) => {
   if(to.meta.requireAuth && !loginStore.isAuthenticate) return {name: 'login'}
   if(to.name == 'session' && loginStore.roleLogin == 'ROLE_USER') router.push({name:'dashbboardUser'})
   if(to.name == 'projectView' && to.params.typeContainer == 'kanban') router.push({name: 'kanbanTemplateView', params: { idProject: to.params.idProject, typeContainer: to.params.typeContainer}})
+  if(to.name == 'projectView' && to.params.typeContainer == 'workoutPlanner') router.push({name: 'workoutPTemplateView', params: { idProject: to.params.idProject, typeContainer: to.params.typeContainer}})
   /* if(to.name == 'sessionLayout' && loginStore.roleLogin == 'ROLE_ADMIN') router.push({name:'dashboardAdmin'}) */
 })
 export default router

@@ -5,14 +5,15 @@ import CreationOptionComponent from '@/components/userCoponents/CreationOptionCo
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
-const test = async () => {
-    userStore.createProject(authStore.username)
-} 
+
+const createProject = (emit:any)=>{
+    userStore.createProject(authStore.username, emit)
+}
 </script>
 <template>
     <div class="user-create-project-wrapper">
         <div class="option-space">
-            <CreationOptionComponent />
+            <CreationOptionComponent @emit-workout="createProject" @emit-kanban="createProject"/>
         </div>
     </div>
 </template>

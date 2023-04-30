@@ -10,4 +10,4 @@ INSERT INTO types_of_elements (id_type_element, name) VALUES (default, "task")
 INSERT INTO types_of_elements (id_type_element, name) VALUES (default, "numered")
 
 INSERT INTO types_of_containers (id_type_container, name) VALUES (default, "kanban")
-INSERT INTO types_of_containers (id_type_container, name) VALUES (default, "workout planner")
+INSERT INTO types_of_containers (id_type_container, name) VALUES (default, "workoutPlanner")

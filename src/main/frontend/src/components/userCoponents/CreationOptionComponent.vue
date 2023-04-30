@@ -4,6 +4,12 @@ import { useUserStore } from '@/stores/userStore';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
+const emits = defineEmits(['emitKanban', 'emitWorkout'])
+
+const emitOption = (typeOfProject:String)=>{
+    if(typeOfProject === 'workoutPlanner') emits('emitWorkout', typeOfProject)
+    if(typeOfProject === 'Kanban') emits('emitKanban', typeOfProject)
+}
 const test = async () => {
     userStore.createProject(authStore.username, 'Kanban')
 } 
@@ -14,9 +20,9 @@ const test = async () => {
             <h1>Crear una nueva plantilla</h1>
         </div>
         <div class="creation-options-zone">
-            <div class="creation-option" @click="test()">Kanban</div>
+            <div class="creation-option" @click="emitOption('Kanban')">Kanban</div>
             <div class="creation-option">Hoja en blanco</div>
-            <div class="creation-option">Entrenamientos</div>
+            <div class="creation-option"  @click="emitOption('workoutPlanner')">Entrenamientos</div>
             <div class="creation-option">Mas...Proximamente</div>
         </div>
     </div>

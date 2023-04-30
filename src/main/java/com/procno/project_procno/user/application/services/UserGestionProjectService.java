@@ -39,6 +39,7 @@ public class UserGestionProjectService {
 
         Project projectToDB = new Project();
         if(typeProject.equals("Kanban")) projectToDB = userCreateAkanbanProject(entity);
+        if(typeProject.equals("workoutPlanner")) projectToDB = userCreateWorkoutPlannerProject(entity);
         
 
         containerRepository.save(projectToDB.getContainer());
@@ -80,6 +81,34 @@ public class UserGestionProjectService {
 
         project.setContainer(containerForProject);
 
+
+        return project;
+    }
+    public Project userCreateWorkoutPlannerProject(Project project){
+
+        List<Element> elements = new ArrayList<>();
+
+        TypeOfElement type = new TypeOfElement(4L,"box");
+
+        Element elementDayOne = new Element(null, "Dia 1",false, "white", "black", new ArrayList<>(), null, type);
+        Element elementDayTwo = new Element(null, "Dia 2",false, "white", "black", new ArrayList<>(), null, type);
+        Element elementDayThree = new Element(null, "Dia 3",false, "white", "black", new ArrayList<>(), null, type);
+        Element elementDayFour = new Element(null, "Dia 4",false, "white", "black", new ArrayList<>(), null, type);
+        Element elementDayFive = new Element(null, "Dia 5",false, "white", "black", new ArrayList<>(), null, type);
+
+        elementRepository.save(elementDayOne);
+        elementRepository.save(elementDayTwo);
+        elementRepository.save(elementDayThree);
+        elementRepository.save(elementDayFour);
+        elementRepository.save(elementDayFive);
+
+        List<TypeOfContainer> typeOfContainer = new ArrayList<>();
+
+        typeOfContainer.add(new TypeOfContainer(2L, "workoutPlanner"));
+
+        Container containerForProject = new Container(null, "container"+project.getTitle(), elements, typeOfContainer);
+
+        project.setContainer(containerForProject);
 
         return project;
     }
