@@ -4,7 +4,7 @@ import StateBoxes from '../basicComponents/StateBoxes.vue';
 import CreateTaskComponent from '@/components/basicComponents/CreateTaskComponent.vue'
 import { computed } from 'vue';
 import { reactive } from 'vue';
-import StateSelectorComponent from '../basicComponents/stateSelectorComponent.vue';
+import StateSelectorComponent from '../basicComponents/StateSelectorComponent.vue';
 const props = defineProps({
     kanban: {
         type: Object as any
@@ -34,7 +34,6 @@ const emitNewTaskToAdd = (emit:any)=>{
 const editTask = (emit:any)=>{
     stateFromIdAndTaskId.idStateFrom= emit.idState
     stateFromIdAndTaskId.idTask = emit.idTask
-    /* emits('editTaskEmit', emit) */
     showModalChangeState.value = true
 } 
 const closeModal = ()=>{
