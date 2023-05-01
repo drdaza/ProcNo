@@ -8,14 +8,14 @@ const props = defineProps({
 })
 const infoElement = ref('')
 const emits = defineEmits(['emitSelection'])
-const selection = ()=>{
-    emits('emitSelection', infoElement)
+const selection = ()=>{    
+    emits('emitSelection', infoElement.value)
 }
 </script>
 <template>
     <div class="create-elements-wrapper">
-        <select v-model="infoElement" name="" id="" @onchange="">
-            <option  :value="typeOfElement.name" v-for="typeOfElement of typesOfElements">{{ typeOfElement.name }}</option>
+        <select v-model="infoElement" name="" id="" @change="selection()">
+            <option :value="typeOfElement.name" v-for="typeOfElement of typesOfElements">{{ typeOfElement.name }}</option>
         </select>
     </div>
 </template>

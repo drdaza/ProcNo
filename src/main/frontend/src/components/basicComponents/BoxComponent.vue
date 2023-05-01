@@ -1,10 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import AddNewElement from './AddNewElement.vue'
 import { onBeforeMount } from 'vue'
 import { useCreationStore } from '@/stores/creationElementStore'
-import CreateElementComponentVue from './CreateElementComponent.vue'
-
+import TypeElementSelectorComponent from './TypeElementSelectorComponent.vue'
 const creationElementStore = useCreationStore()
 
 onBeforeMount( async () => {
@@ -23,8 +21,11 @@ const unfoldEmit = () => {
     (dropdown.value == false) ? dropdown.value = true : dropdown.value = false
     /* emits('unfoldEmit', props.element.id) */
 }
-const addNewElement = ()=>{
-    emits('addElementEmit', props.element.id)
+const addNewElement = (emit:any)=>{
+    emits('addElementEmit', {
+        typeOfElement: emit,
+        idOfBox: props.element.id
+    })
 }
 </script>
 <template>
@@ -41,9 +42,9 @@ const addNewElement = ()=>{
     <div class="info-element" v-if="dropdown == true">
         <h1>subelement</h1>
         
-        <div class="create-task-space">
-        <CreateElementComponentVue :types-of-elements="creationElementStore.allTypesOfElement"/>
-        <AddNewElement @addnew-element="addNewElement()"/>
+        
+        <div class="create-element-space">
+        <TypeElementSelectorComponent @add-element-emit="addNewElement"/>
         </div>
     </div>
 </template>
@@ -76,7 +77,7 @@ const addNewElement = ()=>{
     background-color: v-bind('element.color');
     width: 100%;
 
-    .create-task-space{
+    .create-element-space{
         width: 30%;
     }
 }

@@ -12,7 +12,8 @@ const unfold = (emit:any)=>{
     console.log(emit);
 }
 const addElement = (emit:any)=>{
-    console.log(emit);
+    console.log(emit.typeOfElement);
+    console.log(emit.idOfBox);
 }
 </script>
 <template>
@@ -43,7 +44,6 @@ const addElement = (emit:any)=>{
         gap: 1vh;
         .workouts-box-space{
             width: 80%;
-
         }
         
     }
