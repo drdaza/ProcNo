@@ -43,6 +43,7 @@ public class SecurityConfiguration {
                         .antMatchers("/api/register").permitAll()
                         .antMatchers("/api/login").hasAnyRole("USER", "ADMIN")
                         .antMatchers("/api/user/**").hasAnyRole("USER")
+                        .antMatchers("/api/typeOfElement").hasAnyRole("USER", "ADMIN")
                         .antMatchers("/api/templates/delete").hasRole("ADMIN")
                         .anyRequest()
                         .authenticated())

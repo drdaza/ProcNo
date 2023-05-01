@@ -1,12 +1,22 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import AddNewElement from './AddNewElement.vue'
+import { onBeforeMount } from 'vue'
+import { useCreationStore } from '@/stores/creationElementStore'
+import CreateElementComponentVue from './CreateElementComponent.vue'
+
+const creationElementStore = useCreationStore()
+
+onBeforeMount( async () => {
+    await creationElementStore.listAllTypesOfElements()
+})
 
 const props = defineProps({
     element: {
         type: Object as any
     }
 })
+
 const dropdown = ref(false)
 const emits = defineEmits(['unfoldEmit', 'reduceEmit', 'addElementEmit'])
 const unfoldEmit = () => {
@@ -32,6 +42,7 @@ const addNewElement = ()=>{
         <h1>subelement</h1>
         
         <div class="create-task-space">
+        <CreateElementComponentVue :types-of-elements="creationElementStore.allTypesOfElement"/>
         <AddNewElement @addnew-element="addNewElement()"/>
         </div>
     </div>
