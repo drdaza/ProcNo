@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import AddNewElement from './AddNewElement.vue'
 
 const props = defineProps({
     element: {
@@ -7,10 +8,13 @@ const props = defineProps({
     }
 })
 const dropdown = ref(false)
-const emits = defineEmits(['unfoldEmit', 'reduceEmit'])
+const emits = defineEmits(['unfoldEmit', 'reduceEmit', 'addElementEmit'])
 const unfoldEmit = () => {
     (dropdown.value == false) ? dropdown.value = true : dropdown.value = false
-    emits('unfoldEmit', props.element.id)
+    /* emits('unfoldEmit', props.element.id) */
+}
+const addNewElement = ()=>{
+    emits('addElementEmit', props.element.id)
 }
 </script>
 <template>
@@ -26,11 +30,10 @@ const unfoldEmit = () => {
     </div>
     <div class="info-element" v-if="dropdown == true">
         <h1>subelement</h1>
-        <h1>subelement</h1>
-        <h1>subelement</h1>
-        <h1>subelement</h1>
-        <h1>subelement</h1>
-        <h1>subelement</h1>
+        
+        <div class="create-task-space">
+        <AddNewElement @addnew-element="addNewElement()"/>
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -58,8 +61,12 @@ const unfoldEmit = () => {
 }
 
 .info-element {
-    background-color: red;
+    @include flexDisplay(column, normal, center);
+    background-color: v-bind('element.color');
     width: 100%;
 
+    .create-task-space{
+        width: 30%;
+    }
 }
 </style>

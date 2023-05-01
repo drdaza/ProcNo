@@ -11,6 +11,9 @@ const props = defineProps({
 const unfold = (emit:any)=>{
     console.log(emit);
 }
+const addElement = (emit:any)=>{
+    console.log(emit);
+}
 </script>
 <template>
     <div class="workout-planner-template-wrapper">
@@ -19,7 +22,7 @@ const unfold = (emit:any)=>{
         </h1>
         <div class="workout-planner-coontainer">
             <div v-for="element of workoutPlanner.container.elements" class="workouts-box-space">
-                <BoxComponent @unfold-emit="unfold" :element="element" />
+                <BoxComponent @add-element-emit="addElement" @unfold-emit="unfold" :element="element" />
                 
             </div>
         </div>
