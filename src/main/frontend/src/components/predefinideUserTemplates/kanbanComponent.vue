@@ -49,7 +49,7 @@ const changeTaskState = (emit:any)=>{
 </script>
 <template>
     <div v-if="showModal===true" class="create-task-modal">
-        <CreateTaskComponent @create-task-emit="emitNewTaskToAdd" @close-modal-emit="closeModal"/>
+        <CreateTaskComponent :title-modal="'Crear nueva tarea'" :text-create-button="'Crear tarea'" @create-task-emit="emitNewTaskToAdd" @close-modal-emit="closeModal"/>
     </div>
     <div v-if="showModalChangeState === true" class="change-task-state-modal">
         <StateSelectorComponent @emit-state-to-selected="changeTaskState" @close-modal-emit="closeModal" :states="kanban.container.elements"/>

@@ -14,7 +14,9 @@ onBeforeMount(() => {
 })
 
 const addNewElementToWorkoutTemplate = (emit:any) => {    
-    userStore.addNewTask(authStore.username, parseInt(route.params.idProject as string), emit.idContainer, emit.idOfBox, new CreateTaskPayload('test', 'estos es un test', emit.typeOfElement, 'green', 'black') )
+
+    
+    userStore.addNewTask(authStore.username, parseInt(route.params.idProject as string), emit.idContainer, emit.idOfBox, emit.payload )
     userStore.findProjectInfo(parseInt(route.params.idProject as string))
 } 
 </script>

@@ -1,6 +1,19 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
 
+const props = defineProps ({
+    titleModal:{
+        type: String, 
+        default: 'Crear un nuevo elemento',
+        required: false
+    },
+    textCreateButton:{
+        type: String, 
+        default: 'Crear elemento',
+        required: false
+    }
+})
+
 const payload = reactive({
     name: '',
     description: '',
@@ -23,7 +36,7 @@ const createTaskEmit = ()=>{
             <v-icon :icon="'mdi-close'" @click="closeModalEmit()"></v-icon>
         </div>
 
-        <h1>Crear nueva tarea</h1>
+        <h1>{{titleModal}}</h1>
         <div class="input-zone">
             <input v-model="payload.name" class="info-task" placeholder="Titulo" type="text">
             <input v-model="payload.description" class="info-task" placeholder="Descripción" type="text">
@@ -32,7 +45,7 @@ const createTaskEmit = ()=>{
         </div>
 
         <div class="button-zone">
-            <v-btn :width="'40%'" :color="'green'" @click="createTaskEmit()">Crear Tarea</v-btn>
+            <v-btn :width="'40%'" :color="'green'" @click="createTaskEmit()">{{textCreateButton}}</v-btn>
             <v-btn :width="'40%'" :color="'red'" @click="closeModalEmit()">Cancelar</v-btn>
         </div>
     </div>
