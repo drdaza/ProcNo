@@ -40,9 +40,7 @@ const addNewElement = (emit:any)=>{
 
     </div>
     <div class="info-element" v-if="dropdown == true">
-        <h1>subelement</h1>
-        
-        
+        <h1 v-for="subElement of element.subElements">{{subElement.name}}: {{ subElement.info[0].content }}</h1>
         <div class="create-element-space">
         <TypeElementSelectorComponent @add-element-emit="addNewElement"/>
         </div>
@@ -79,6 +77,7 @@ const addNewElement = (emit:any)=>{
 
     .create-element-space{
         width: 30%;
+        
     }
 }
 </style>

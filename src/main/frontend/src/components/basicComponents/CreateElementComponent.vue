@@ -20,5 +20,22 @@ const selection = ()=>{
     </div>
 </template>
 <style lang="scss" scoped>
-    
+@use '@/assets/styles/main' as *;
+.create-elements-wrapper {
+    @include flexDisplay(row, center, center);
+    border: 2px solid black;
+    border-radius: 5px;
+    width:100%;
+    select{
+        text-align: center;
+    }
+}
+.create-elements-wrapper:hover {
+    border: 2px solid cadetblue;
+    cursor: pointer;
+    select:hover{
+        color: cadetblue;
+        cursor: pointer;
+    }
+}
 </style>

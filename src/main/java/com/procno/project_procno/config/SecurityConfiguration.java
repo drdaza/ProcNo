@@ -13,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.procno.project_procno.user.application.detailsService.JpaUserDetailsService;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -29,8 +31,7 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
+                .cors(withDefaults())
                 .headers(header -> header.frameOptions().sameOrigin())
                 .csrf(csrf -> csrf.disable())
                 .formLogin(form -> form
@@ -39,7 +40,7 @@ public class SecurityConfiguration {
                 .logout(out -> out
                         .logoutUrl("/api/logout")
                         .deleteCookies("JSESSIONID"))
-                .authorizeRequests(auth -> auth
+                .authorizeHttpRequests(auth -> auth
                         .antMatchers("/api/register").permitAll()
                         .antMatchers("/api/login").hasAnyRole("USER", "ADMIN")
                         .antMatchers("/api/user/**").hasAnyRole("USER")

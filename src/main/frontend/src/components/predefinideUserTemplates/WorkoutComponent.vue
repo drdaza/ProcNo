@@ -8,12 +8,15 @@ const props = defineProps({
     }
 })
 
+const emits = defineEmits(['emitAddElement'])
+
 const unfold = (emit:any)=>{
     console.log(emit);
 }
 const addElement = (emit:any)=>{
-    console.log(emit.typeOfElement);
-    console.log(emit.idOfBox);
+    if (emit.typeOfElement === undefined) return
+    emit.idContainer = props.workoutPlanner.id
+    emits('emitAddElement', emit)
 }
 </script>
 <template>

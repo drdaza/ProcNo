@@ -33,7 +33,6 @@ const chooseTypeOfElement = (emit:any)=>{
 .type-element-selector-wrapper{
     @include flexDisplay(row, space-around, center);
     width: 100%;
-
 }
 
 </style>
