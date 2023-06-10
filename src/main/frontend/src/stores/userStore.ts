@@ -38,13 +38,13 @@ export const useUserStore = defineStore('userInfo',{
             
             return response
         },
-        async createProject(username:String, typeProject:String){
+        async createProject(username:String,infoProject:any, typeProject:String){
             const repository = new Repository('basic')
             const service = repository.chooseUserService()
 
             const info = {
-                title: 'my project',
-                description: 'is a new project'
+                title: infoProject.nameProject,
+                description: infoProject.descriptionProject
             }
             await service?.createProject(username, info, typeProject);
 

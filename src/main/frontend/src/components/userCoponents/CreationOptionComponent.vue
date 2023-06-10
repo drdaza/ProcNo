@@ -10,9 +10,6 @@ const emitOption = (typeOfProject:String)=>{
     if(typeOfProject === 'workoutPlanner') emits('emitWorkout', typeOfProject)
     if(typeOfProject === 'Kanban') emits('emitKanban', typeOfProject)
 }
-const test = async () => {
-    userStore.createProject(authStore.username, 'Kanban')
-} 
 </script>
 <template>
     <div class="options-wrapper">
